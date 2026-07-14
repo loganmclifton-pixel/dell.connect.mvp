@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+closeModal('createEvent');
+document.getElementById('ceName').value='';document.getElementById('ceLoc').value='';
+saveAll();
+showToast(`📅 "${name}" event created!`);
+renderEvents();
+}
+// =========================================================
+// TOAST
+// =========================================================
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
+// =========================================================
+// RESET
+// =========================================================
+function resetApp(){
+if(!confirm('This will clear all your data and restart. Continue?'))return;
+localStorage.removeItem('dcmvp_user');localStorage.removeItem('dcmvp_groups');
+localStorage.removeItem('dcmvp_events');localStorage.removeItem('dcmvp_people');
+location.reload();
+}
+// =========================================================
+// INIT
+// =========================================================
+(function init(){
+loadAll();
+if(user){
+seedCheck();
+launchApp();
+} else {
+seedData();
+document.getElementById('onboarding').classList.remove('hidden');
+buildInterestGrid('interestGrid',selectedInterests,'obToggle');
+}
+})();
+function seedCheck(){
+if(!groups.length) seedData();
+}
+</script>
+</body>
+</html>
